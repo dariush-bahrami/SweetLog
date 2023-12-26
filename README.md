@@ -1,0 +1,2 @@
+# SweetLog
+Python Logging Package
