@@ -40,7 +40,7 @@ logger = Logger([file_stream], level=LoggingLevel.DEBUG)
 logger.debug('This is a debug message')
 ```
 
-This will write the debug message to the `log.txt` file. I you want to add `stdout` as a stream, you can do this:
+This will write the debug message to the `log.txt` file. If you want to add `stdout` as a stream, you can do this:
 
 ```python
 import sys
