@@ -21,7 +21,7 @@ class Logger:
         self.logging_format = logging_format
 
     def __repr__(self):
-        return f"Logger(stream={self.stream}, level={self.level})"
+        return f"Logger(streams={self.streams}, level={self.level})"
 
     def write(self, message: str, level: LoggingLevel):
         if level.value >= self.level.value:
