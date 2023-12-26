@@ -11,19 +11,19 @@ class Logger:
     def __init__(
         self,
         streams: Iterable[Writable] = [sys.stdout],
-        level=LoggingLevel.WARNING,
-        datettime_format="%Y-%m-%d %H:%M:%S",
-        logging_format="[{datetime_string}] [{level_string}] {message}",
-    ):
+        level: LoggingLevel = LoggingLevel.WARNING,
+        datettime_format: str = "%Y-%m-%d %H:%M:%S",
+        logging_format: str = "[{datetime_string}] [{level_string}] {message}",
+    ) -> None:
         self.streams = streams
         self.level = level
         self.datettime_format = datettime_format
         self.logging_format = logging_format
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Logger(streams={self.streams}, level={self.level})"
 
-    def write(self, message: str, level: LoggingLevel):
+    def write(self, message: str, level: LoggingLevel) -> None:
         if level.value >= self.level.value:
             datetime_string = datetime.now().strftime(self.datettime_format)
             level_string = level.name
@@ -39,26 +39,26 @@ class Logger:
                 stream.write(formatted_message)
                 stream.flush()
 
-    def debug(self, message):
+    def debug(self, message: str) -> None:
         self.write(message, LoggingLevel.DEBUG)
 
-    def info(self, message):
+    def info(self, message: str) -> None:
         self.write(message, LoggingLevel.INFO)
 
-    def warning(self, message):
+    def warning(self, message: str) -> None:
         self.write(message, LoggingLevel.WARNING)
 
-    def error(self, message):
+    def error(self, message: str) -> None:
         self.write(message, LoggingLevel.ERROR)
 
-    def critical(self, message):
+    def critical(self, message: str) -> None:
         self.write(message, LoggingLevel.CRITICAL)
 
     def get_decorator(
         self,
-        level=LoggingLevel.DEBUG,
-        log_arguments=True,
-        log_return=True,
+        level: LoggingLevel = LoggingLevel.DEBUG,
+        log_arguments: bool = True,
+        log_return: bool = True,
     ) -> Callable:
         def decorator(function):
             @wraps(function)
