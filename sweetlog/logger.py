@@ -27,15 +27,16 @@ class Logger:
         if level.value >= self.level.value:
             datetime_string = datetime.now().strftime(self.datettime_format)
             level_string = level.name
-            for stream in self.streams:
-                stream.write(
-                    self.logging_format.format(
-                        datetime_string=datetime_string,
-                        level_string=level_string,
-                        message=message,
-                    )
-                    + "\n"
+            formatted_message = (
+                self.logging_format.format(
+                    datetime_string=datetime_string,
+                    level_string=level_string,
+                    message=message,
                 )
+                + "\n"
+            )
+            for stream in self.streams:
+                stream.write(formatted_message)
                 stream.flush()
 
     def debug(self, message):
