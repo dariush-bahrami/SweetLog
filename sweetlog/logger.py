@@ -12,19 +12,30 @@ class Logger:
         self,
         streams: Iterable[Writable] = [sys.stdout],
         level=LoggingLevel.WARNING,
+        datettime_format="%Y-%m-%d %H:%M:%S",
+        logging_format="[{datetime_string}] [{level_string}] {message}",
     ):
         self.streams = streams
         self.level = level
+        self.datettime_format = datettime_format
+        self.logging_format = logging_format
 
     def __repr__(self):
         return f"Logger(stream={self.stream}, level={self.level})"
 
     def write(self, message: str, level: LoggingLevel):
         if level.value >= self.level.value:
-            datetime_string = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            datetime_string = datetime.now().strftime(self.datettime_format)
             level_string = level.name
             for stream in self.streams:
-                stream.write(f"[{datetime_string}] [{level_string}] {message}\n")
+                stream.write(
+                    self.logging_format.format(
+                        datetime_string=datetime_string,
+                        level_string=level_string,
+                        message=message,
+                    )
+                    + "\n"
+                )
                 stream.flush()
 
     def debug(self, message):
