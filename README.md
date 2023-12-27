@@ -1,7 +1,7 @@
 # SweetLog
 
 <div align="center">
-<img src="./assets/sweetlog.png" alt="SweetLog Logo" width="256" st/>
+<img src="https://raw.githubusercontent.com/dariush-bahrami/SweetLog/main/assets/sweetlog.png" alt="SweetLog Logo" width="256" st/>
 </div>
 
 <p align="center">
